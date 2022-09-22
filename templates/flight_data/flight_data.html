@@ -1,0 +1,14 @@
+
+<h1>Flight Data By Date</h1>
+{% for flight in Jan2022 %}
+    <ul>
+        <li>{{flight.pickup_lat}}Flight Number: {{flight.call_sign}} | Date: {{flight.transport_date}} | Base: {{flight.base}} | Depart: {{flight.depart_base}}</li>
+    </ul>
+{% endfor %}
+
+<h1>Flight Data</h1>
+{% for flight in flights %}
+<ul>
+    <li>{{flight.year}}Flight Number: {{flight.flight_num}} | Date: {{flight.transport_date}} | Date: {{flight.base}}</li>
+</ul>
+{% endfor %}

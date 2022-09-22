@@ -1,0 +1,8 @@
+{% load static %}
+<h1>This is the header</h1>
+<a class="cs-color cs-popup-joinus-btn login-popup text-danger" href="{% url 'logout' %}">Logout</a>
+
+{% if user.role == 2%}
+<h3>Top Secret</h3>
+{% endif %}
+{{user.role}}

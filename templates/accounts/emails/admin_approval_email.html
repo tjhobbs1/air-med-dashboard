@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Hi {{ user.first_name }},
+
+{% if is_approved %}
+Congratulations your restuarant has been approved by our admin team. 
+
+
+{% else %}
+We are sorry we can not approve you at this time. 
+For me details please contact our support team. 
+{% endif %}
+
+Thank you,
+--foodOnline
+
+{% endautoescape %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="call_sign"
+                        placeholder="Call Sign" />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <input type="date" id="start" name="trip_start" value="2018-07-22" min="2018-01-01" max="2050-12-31">
+
+        <input type="date" id="start" name="trip_end" value="2018-07-22" min="2018-01-01" max="2050-12-31">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <hr>
+    <div class="row">
+        <ul>
+            {% for flight in queryset %}
+                <li>{{flight.vehicle}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

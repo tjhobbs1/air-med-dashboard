@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My Blog
+{% endblock %}
+
+
+
+{% block content %}
+{% include 'includes/navbar.html'%}
+<h1>Team Dashboard</h1>
+{{user.username}}
+{{user.first_name}}
+{{user.is_superadmin}}
+
+{%include 'includes/alerts.html'%}
+
+{% endblock %}

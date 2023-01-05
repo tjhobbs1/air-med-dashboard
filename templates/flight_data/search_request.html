@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form method="get">
+    {{ listing_filter.form }}
+    <button class="btn btn-sm btn-danger" type="submit">Submit</button>
+</form>
+    <h1>Flight Data</h1>
+    {% for listing in listing_filter.qs %}
+    <ul>
+        <li>{{listing.transport_date}} | Flight Number: {{listing.flight_num}} | Base: {{listing.base}}
+        </li>
+    </ul>
+    {% endfor %}
+    
+</body>
+</html>

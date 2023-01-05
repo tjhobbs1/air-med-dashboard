@@ -101,6 +101,140 @@ class Airmedflights(models.Model):
         app_label = 'flight_data'
 
 
+class AdultQuality(models.Model):
+    flight_num = models.CharField(
+        primary_key=True, max_length=100, blank=True, null=True)
+    mission_date = models.CharField(max_length=100, blank=True, null=True)
+    mission_num = models.CharField(max_length=100, blank=True, null=True)
+    base = models.CharField(max_length=100, blank=True, null=True)
+    ref_company = models.CharField(max_length=500, blank=True, null=True)
+    rec_company = models.CharField(max_length=500, blank=True, null=True)
+    staff_attendant_1 = models.CharField(max_length=500, blank=True, null=True)
+    staff_attendant_2 = models.CharField(max_length=500, blank=True, null=True)
+    vehicle_name = models.CharField(max_length=500, blank=True, null=True)
+    mission_type_id = models.CharField(max_length=500, blank=True, null=True)
+    camtscategoryadult = models.CharField(
+        max_length=1000, blank=True, null=True)
+    wasthisanopatienttransport = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthepatienttransportedwithanadvancedairwayinplace = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheadvancedairwayachronictracheostomytubeandthepatientdidnot = models.CharField(
+        max_length=100, blank=True, null=True)
+    whatadvancedairwaydevicewasinplace = models.CharField(
+        max_length=500, blank=True, null=True)
+    wasthesupraglotticairwayplacedafterunsuccessfulintubationattemp = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheadvancedairwayplacedbythetransportteam = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheredocumentationofatleast2formsofconfirmationoftheadvanced = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasinvasiveventilationusedonthepatientwithanadvancedairway = models.CharField(
+        max_length=100, blank=True, null=True)
+    waswaveformcapnographyusedthroughouttransport = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthespo2ever90orabove = models.CharField(
+        max_length=100, blank=True, null=True)
+    didthepulseoximetryfallbelow90duringourcare = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthespo293 = models.CharField(max_length=100, blank=True, null=True)
+    wassupplementaloxygenadministered = models.CharField(
+        max_length=100, blank=True, null=True)
+    medical_oxygenation_didsupplementaloxygenmaintainspo293 = models.CharField(
+        max_length=100, blank=True, null=True)
+    waspatienttransportedwithappropriatevascularaccess = models.CharField(
+        max_length=100, blank=True, null=True)
+    wascardiopulmonaryresuscitationwithchestcompressionsrequiredwhi = models.CharField(
+        max_length=100, blank=True, null=True)
+    werechestcompressionsperformedinamovingtransportvehicle = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasacommercialcprdeviceused = models.CharField(
+        max_length=100, blank=True, null=True)
+    didpatienthavereturnofspontaneouscirculation = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasagcsdocumented = models.CharField(max_length=100, blank=True, null=True)
+    didthepatienthaveanalteredmentalstatuswithagcs15andorafocalneur = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasabloodglucoselevelmeasuredbyeitherprehospitalhospitalortrans = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasapttempdocumented = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheredocumentationofapainassessmentorreasonwhyitcouldnotbeas = models.CharField(
+        max_length=100, blank=True, null=True)
+    werepainmedsgiven = models.CharField(max_length=100, blank=True, null=True)
+    wasapainreassessmentdonepriortotheendofthetransportorareasonwhy = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthesendingemsagencynamedocumented = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasrsiutilizedtosecuretheairway = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheintubationdoneintransportvehicle = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheintubationsuccessfulonthefirstattempt = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthersichecklistutilizedorreasondocumentedwhyitwasntused = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthersiprotocolfollowed = models.CharField(
+        max_length=100, blank=True, null=True)
+    explainrsiprotocolnotfollowedconcern = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheventutilizedbedsidetobesideorfromtimeofintubationtoreceiv = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthepatientventilatedinpressureorvolumemode = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasapplatdocumented = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthepplatgreaterthan30 = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheredocumentationofstrategiesonmeasurestogetthepplatbelow30 = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasavtedocumented = models.CharField(max_length=100, blank=True, null=True)
+    wassedationgivenperprotocol = models.CharField(
+        max_length=100, blank=True, null=True)
+    explainsedationconcerns = models.CharField(
+        max_length=1000, blank=True, null=True)
+    postintubationwereparalyticsgiventothepatient = models.CharField(
+        max_length=100, blank=True, null=True)
+    werepainmedsgivenincludingketamineadministeredtotheintubatedpt = models.CharField(
+        max_length=100, blank=True, null=True)
+    didpatientexperienceanysideeffectsortransfusionreaction = models.CharField(
+        max_length=100, blank=True, null=True)
+    waspatienttemperaturedocumented = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasbloodadministeredasaresultoftraumaticinjury = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthepatientpronounceddead = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasitcalledbytheflightcrew = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastimeofdeathdocumentedinchart = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthenameofthedoctorthatwascalledtopronouncethedeathnotedinthe = models.CharField(
+        max_length=100, blank=True, null=True)
+    waspatienttransportedtoburncenter = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasthecorrectvolumeofivfadministeredbasedonparklandformula = models.CharField(
+        max_length=100, blank=True, null=True)
+    waspatientdiagnosedorsuspectedcovid19positive = models.CharField(
+        max_length=100, blank=True, null=True)
+    werelungprotectiveventilatorsettings6mlkgutilizedforintubatedpa = models.CharField(
+        max_length=100, blank=True, null=True)
+    wasnihstrokescoredocumented = models.CharField(
+        max_length=100, blank=True, null=True)
+    ifnihss4waspatienttransportedtothrombectomycapablefacility = models.CharField(
+        max_length=100, blank=True, null=True)
+    waspatientexperiencingacutecoronarysyndromeacsorstemi = models.CharField(
+        max_length=100, blank=True, null=True)
+    wastheredocumentationof12leadecginterpretationconsistentwithste = models.CharField(
+        max_length=100, blank=True, null=True)
+    atanypointduringtransportwerethehrandbloodpressureoutsideprotoc = models.CharField(
+        max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'adultquality'
+        app_label = 'adult_quality'
+
 # class AuthGroup(models.Model):
 #     name = models.CharField(unique=True, max_length=150)
 

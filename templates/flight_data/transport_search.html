@@ -1,0 +1,1133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding-left: 30px; padding-top: 30px;">
+<!--Form-->
+    <h4>Transport Date Range</h4>
+    <form method="get">
+       <!-- {{ listing_filter.form.as_p }} -->
+        <input type="date" name="startDate"><br /><br />
+        <input type="date" name="endDate"><br /><br />
+        <input type="submit" />
+    </form>
+</div>
+<!--End Form-->
+
+<!--DSM Card-->
+<div class="row_div">
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <h1>Air Med 1</h1>
+                <h5>Interfacility: {{ dsm_interfacility.count }}</h5>
+                <h5>Scene: {{ dsm_scene.count }}</h5>
+                <h3>Totals</h3>
+                <h2>{{dsm_total_flights}}</h2>
+                <h5>{{ start_date }} - {{ end_date }}</h5>
+            </div>
+            </div>
+
+<!--End DSM Card-->
+
+<!--KX Card-->
+
+<div class="column">
+    <div class="card">
+        <h1>Air Med 2</h1>
+        <h5>Interfacility: {{ kx_interfacility.count }}</h5>
+        <h5>Scene: {{ kx_scene.count }}</h5>
+        <h3>Totals</h3>
+        <h2>{{kx_total_flights}}</h2>
+        <h5>{{ start_date }} - {{ end_date }}</h5>
+    </div>
+</div>
+<!--End KX Card-->
+
+<!--MC Card-->
+
+<div class="column">
+    <div class="card">
+        <h1>Air Med 3</h1>
+        <h5>Interfacility: {{ mc_interfacility.count }}</h5>
+        <h5>Scene: {{ mc_scene.count }}</h5>
+        <h3>Totals</h3>
+        <h2>{{mc_total_flights}}</h2>
+        <h5>{{ start_date }} - {{ end_date }}</h5>
+    </div>
+</div>
+<!--End MC Card-->
+
+<!--SC Card-->
+
+<div class="column">
+    <div class="card">
+        <h1>Air Med 4</h1>
+        <h3>Totals</h3>
+        <h5>Interfacility: {{ sc_interfacility.count }}</h5>
+        <h5>Scene: {{ sc_scene.count }}</h5>
+        <h2>{{sc_total_flights}}</h2>
+        <h5>{{ start_date }} - {{ end_date }}</h5>
+    </div>
+</div>
+<!--End SC Card-->
+        
+    </div>
+</div> <!--End Cards-->
+<br>
+
+
+{%for i in dsm_day_of_week%}
+    {{i.flight_date}} : {{i.call_count}}
+
+{% endfor %}
+
+
+<br>
+Knoxville
+{%for i in kx_day_of_week%}
+{{i.flight_date}} : {{i.call_count}}
+
+{% endfor %}
+<br>
+
+
+
+
+<!--Total Flights Bar Chart-->
+<div style="padding-left: 180px; padding-right:180px; padding-top: 100px; padding-bottom: 100px;"><canvas id="myChart"></canvas></div>
+
+
+<div class="container px-4">
+
+    <div class="row gx-5">
+        <!--Interfacility Flight Charts-->
+        <div class="col">
+            <div class="p-4 border bg-light"><canvas id="bar-chart"></canvas></div>
+        </div>
+        <!--Scene Flight Charts-->
+        <div class="col">
+            <div class="p-4 border bg-light"><canvas id="bar-chart-1"></canvas></div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<hr>
+
+<!--DSM Flight By Hours Charts-->
+<div class="col" style="padding-top: 50px; padding-bottom: 50px; padding-left: 100px; padding-right:100px">
+    <div class="p-4 border bg-light"><canvas id="dsm-hour-chart"></canvas></div>
+</div>
+
+<!--KX Flight By Hours Charts-->
+<div class="col" style="padding-bottom: 50px; padding-left: 100px; padding-right:100px">
+    <div class="p-4 border bg-light"><canvas id="kx-hour-chart"></canvas></div>
+</div>
+
+<!--Mason City Flight By Hours Charts-->
+<div class="col" style="padding-bottom: 50px; padding-left: 100px; padding-right:100px">
+    <div class="p-4 border bg-light"><canvas id="mc-hour-chart"></canvas></div>
+</div>
+
+<!--Sioux City Flight By Hours Charts-->
+<div class="col" style="padding-bottom: 50px; padding-left: 100px; padding-right:100px">
+    <div class="p-4 border bg-light"><canvas id="sc-hour-chart"></canvas></div>
+</div>
+
+<hr>
+
+<div id="accordion" style="padding-left: 50px; padding-right: 50px;">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Air Med 1 Top Hospital Requestors
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+      <div class="card-body">
+
+        <!--DSM Reffering Interfacility Table-->
+        <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+            <table class="table table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1
+                            Interfacility
+                        </td>
+                    </tr>
+                </thead>
+        
+                <tr>
+                    <th scope="col">Hosptial Requestor</th>
+                    <th scope="col" style="text-align: center;">Number of Calls</th>
+                </tr>
+        
+                {% for i in dsm_interfacility_requestor %}
+                <tr>
+                    <td scope="row">{{i.requesting_agency}}</td>
+                    <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                </tr>
+        
+                {% endfor %}
+            </table>
+        </div>
+        <!-- END DSM Reffering Interfacility-->
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Air Med 1 Top Scene Requestors
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+      <div class="card-body">
+        <!--DSM Reffering Scene-->
+        <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+            <table class="table table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1
+                            Scene
+                        </td>
+                    </tr>
+                </thead>
+        
+                <tr>
+                    <th scope="col">Scene Requestor</th>
+                    <th scope="col" style="text-align: center;">Number of Calls</th>
+                </tr>
+
+                {% if not dsm_scene_requestor %}
+                    <h1>No Scene Flights</h1>
+                    <h4>For Given Date Range</h4>
+                
+                {% endif %}
+        
+                {% for i in dsm_scene_requestor %}
+                <tr>
+                    <td scope="row">{{i.requesting_agency}}</td>
+                    <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                </tr>
+        
+                {% endfor %}
+            </table>
+        </div>
+        <!-- End DSM Reffering Scene-->
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!--KNOXVILLE-->
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Air Med 2 Top Hospital Requestors
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
+      <div class="card-body">
+        <!--KX Reffering Interfacility Table-->
+        <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+            <table class="table table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 2
+                            Interfacility
+                        </td>
+                    </tr>
+                </thead>
+        
+                <tr>
+                    <th scope="col">Hosptial Requestor</th>
+                    <th scope="col" style="text-align: center;">Number of Calls</th>
+                </tr>
+        
+                {% for i in kx_interfacility_requestor %}
+                <tr>
+                    <td scope="row">{{i.requesting_agency}}</td>
+                    <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                </tr>
+        
+                {% endfor %}
+            </table>
+        </div>
+        <!-- END KX Reffering Interfacility-->
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="card">
+    <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                aria-expanded="false" aria-controls="collapseFour">
+                Air Med 2 Top Scene Requestors
+            </button>
+        </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordion">
+        <div class="card-body">
+        <!--KX Reffering Scene-->
+        <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+            <table class="table table-striped" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 2
+                            Scene
+                        </td>
+                    </tr>
+                </thead>
+        
+                <tr>
+                    <th scope="col">Scene Requestor</th>
+                    <th scope="col" style="text-align: center;">Number of Calls</th>
+                </tr>
+
+                {% if not kx_scene_requestor %}
+                    <h1>No Scene Flights</h1>
+                    <h4>For Given Date Range</h4>
+                
+                {% endif %}
+        
+                {% for i in kx_scene_requestor %}
+                <tr>
+                    <td scope="row">{{i.requesting_agency}}</td>
+                    <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                </tr>
+        
+                {% endfor %}
+            </table>
+        </div>
+        <!-- End KX Reffering Scene-->
+        </div>
+    </div>
+    </div>
+    
+    <br>
+
+    <!--MASON CITY-->
+    <div class="card">
+        <div class="card-header" id="headingFive">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                    aria-expanded="false" aria-controls="collapseFive">
+                    Air Med 3 Top Hospital Requestors
+                </button>
+            </h5>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-bs-parent="#accordion">
+            <div class="card-body">
+                <!--MC Reffering Scene-->
+                <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+                    <table class="table table-striped" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 3
+                                    Interfacility
+                                </td>
+                            </tr>
+                        </thead>
+    
+                        <tr>
+                            <th scope="col">Hospital Requestor</th>
+                            <th scope="col" style="text-align: center;">Number of Calls</th>
+                        </tr>
+    
+                        {% for i in mc_interfacility_requestor %}
+                        <tr>
+                            <td scope="row">{{i.requesting_agency}}</td>
+                            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                        </tr>
+    
+                        {% endfor %}
+                    </table>
+                </div>
+                <!-- End MC Reffering Scene-->
+            </div>
+        </div>
+        
+    
+    
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingSix">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                    aria-expanded="false" aria-controls="collapseSix">
+                    Air Med 3 Top Scene Requestors
+                </button>
+            </h5>
+        </div>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-bs-parent="#accordion">
+            <div class="card-body">
+                <!--MC Reffering Scene-->
+                <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+                    <table class="table table-striped" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 3
+                                    Scene
+                                </td>
+                            </tr>
+                        </thead>
+    
+                        <tr>
+                            <th scope="col">Scene Requestor</th>
+                            <th scope="col" style="text-align: center;">Number of Calls</th>
+                        </tr>
+
+                        {% if  not mc_scene_requestor  %}
+                            <h1>No Scene Flights</h1>
+                            <h4>For Given Date Range</h4>
+
+                        {% endif %}
+    
+                        {% for i in mc_scene_requestor %}
+                        <tr>
+                            <td scope="row">{{i.requesting_agency}}</td>
+                            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                        </tr>
+    
+                        {% endfor %}
+                    </table>
+                </div>
+                <!-- End MC Reffering Scene-->
+            </div>
+        </div>
+        
+        <br>
+    
+    
+    
+
+    
+    </div>
+<br>
+<!--SIOUX CITY-->
+<div class="card">
+    <div class="card-header" id="headingSeven">
+        <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
+                aria-expanded="false" aria-controls="collapseSeven">
+                Air Med 4 Top Hospital Requestors
+            </button>
+        </h5>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-bs-parent="#accordion">
+        <div class="card-body">
+            <!--SC Reffering Scene-->
+            <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+                <table class="table table-striped" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <td colspan="2"
+                                style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 4
+                                Interfacility
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <th scope="col">Hospital Requestor</th>
+                        <th scope="col" style="text-align: center;">Number of Calls</th>
+                    </tr>
+
+                    {% for i in sc_interfacility_requestor %}
+                    <tr>
+                        <td scope="row">{{i.requesting_agency}}</td>
+                        <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- End SC Reffering Scene-->
+        </div>
+    </div>
+    
+
+
+</div>
+<div class="card">
+    <div class="card-header" id="headingEight">
+        <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight"
+                aria-expanded="false" aria-controls="collapseEight">
+                Air Med 4 Top Scene Requestors
+            </button>
+        </h5>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-bs-parent="#accordion">
+        <div class="card-body">
+            <!--SC Reffering Scene-->
+            <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+                <table class="table table-striped" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <td colspan="2"
+                                style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 4
+                                Scene
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <th scope="col">Scene Requestor</th>
+                        <th scope="col" style="text-align: center;">Number of Calls</th>
+                    </tr>
+
+                    {% if not sc_scene_requestor %}
+                    <h1>No Scene Flights</h1>
+                    <h4>For Given Date Range</h4>
+
+                    {% endif %}
+
+                    {% for i in sc_scene_requestor %}
+                    <tr>
+                        <td scope="row">{{i.requesting_agency}}</td>
+                        <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- End  Reffering Scene-->
+        </div>
+    </div>
+    
+
+</div>
+</div>
+</id>
+
+<!--DSM Reffering Interfacility Table-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1
+                    Receiving
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Receiving Hosptial</th>
+            <th scope="col" style="text-align: center;">Number of Calls</th>
+        </tr>
+
+        {% for i in dsm_reciever %}
+        <tr>
+            <td scope="row">{{i.dropoff_location}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>
+<!-- END DSM Reffering Interfacility-->
+
+
+
+
+<div style="padding-top: 50px; padding-right: 50px;  padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1
+                   Missed Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Type of Miss</th>
+            <th scope="col" style="text-align: center;">Missed Type</th>
+        </tr>
+
+        {% for i in dsm_missed_by_count %}
+        <tr>
+            <td scope="row">{{i.primary_cancel_reason_for_miss}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Missed</td>
+            <td scope="row" style="text-align: center;">{{dsm_missed.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End Des Moines Missed-->
+
+<!--Knoxville  Missed Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 2
+                    Missed Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Type of Miss</th>
+            <th scope="col" style="text-align: center;">Missed Type</th>
+        </tr>
+
+        {% for i in kx_missed_by_count %}
+        <tr>
+            <td scope="row">{{i.primary_cancel_reason_for_miss}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Missed</td>
+            <td scope="row" style="text-align: center;">{{kx_missed.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End Knoxville Missed-->
+
+<!--Mason City  Missed Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 3
+                    Missed Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Type of Miss</th>
+            <th scope="col" style="text-align: center;">Missed Type</th>
+        </tr>
+
+        {% for i in mc_missed_by_count %}
+        <tr>
+            <td scope="row">{{i.primary_cancel_reason_for_miss}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Missed</td>
+            <td scope="row" style="text-align: center;">{{mc_missed.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End Mason City  Missed-->
+
+
+<!--Sioux City  Missed Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 4
+                    Missed Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Type of Miss</th>
+            <th scope="col" style="text-align: center;">Missed Type</th>
+        </tr>
+
+        {% for i in sc_missed_by_count %}
+        <tr>
+            <td scope="row">{{i.primary_cancel_reason_for_miss}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_count}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Missed</td>
+            <td scope="row" style="text-align: center;">{{sc_missed.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End Mason City  Missed-->
+
+
+
+<!--List of Des Moines Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1
+                    Transported Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col" style="text-align: center;">Flight Date</th>
+            <th scope="col" style="text-align: center;">Outcome</th>
+            <th scope="col" style="text-align: center;">Flight Type</th>
+            <th scope="col" style="text-align: center;">Referrer</th>
+            <th scope="col" style="text-align: center;">Requestor</th>
+            <th scope="col" style="text-align: center;">Receving Agency</th>
+        </tr>
+
+        {% for i in dsm_all_transported %}
+        <tr>
+            <td scope="row">{{i.flight_num}}</td>
+            <td scope="row" style="text-align: center;">{{i.transport_date}}</td>
+            <td scope="row" style="text-align: center;">{{i.outcome}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_type}}</td>
+            <td scope="row" style="text-align: center;">{{i.referrer_name}}</td>
+            <td scope="row" style="text-align: center;">{{i.requesting_agency}}</td>
+            <td scope="row" style="text-align: center;">{{i.dropoff_location}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Transports</td>
+            <td scope="row" style="text-align: center;">{{dsm_all_transported.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End List of Des Moines Flights-->
+
+
+<!--List of Knoxville Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 2
+                    Transported Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col" style="text-align: center;">Flight Date</th>
+            <th scope="col" style="text-align: center;">Outcome</th>
+            <th scope="col" style="text-align: center;">Flight Type</th>
+            <th scope="col" style="text-align: center;">Referrer</th>
+            <th scope="col" style="text-align: center;">Requestor</th>
+            <th scope="col" style="text-align: center;">Receving Agency</th>
+        </tr>
+
+        {% for i in kx_all_transported %}
+        <tr>
+            <td scope="row">{{i.flight_num}}</td>
+            <td scope="row" style="text-align: center;">{{i.transport_date}}</td>
+            <td scope="row" style="text-align: center;">{{i.outcome}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_type}}</td>
+            <td scope="row" style="text-align: center;">{{i.referrer_name}}</td>
+            <td scope="row" style="text-align: center;">{{i.requesting_agency}}</td>
+            <td scope="row" style="text-align: center;">{{i.dropoff_location}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Transports</td>
+            <td scope="row" style="text-align: center;">{{kx_all_transported.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End List of Knoxville Flights-->
+
+
+<!--List of Mason City Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 3
+                    Transported Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col" style="text-align: center;">Flight Date</th>
+            <th scope="col" style="text-align: center;">Outcome</th>
+            <th scope="col" style="text-align: center;">Flight Type</th>
+            <th scope="col" style="text-align: center;">Referrer</th>
+            <th scope="col" style="text-align: center;">Requestor</th>
+            <th scope="col" style="text-align: center;">Receving Agency</th>
+        </tr>
+
+        {% for i in mc_all_transported %}
+        <tr>
+            <td scope="row">{{i.flight_num}}</td>
+            <td scope="row" style="text-align: center;">{{i.transport_date}}</td>
+            <td scope="row" style="text-align: center;">{{i.outcome}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_type}}</td>
+            <td scope="row" style="text-align: center;">{{i.referrer_name}}</td>
+            <td scope="row" style="text-align: center;">{{i.requesting_agency}}</td>
+            <td scope="row" style="text-align: center;">{{i.dropoff_location}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Transports</td>
+            <td scope="row" style="text-align: center;">{{mc_all_transported.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End List of Mason City Flights-->
+
+<!--List of Sioux City Flights-->
+<div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+    <table class="table table-striped" style="width:100%;">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 4
+                    Transported Flights
+                </td>
+            </tr>
+        </thead>
+
+        <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col" style="text-align: center;">Flight Date</th>
+            <th scope="col" style="text-align: center;">Outcome</th>
+            <th scope="col" style="text-align: center;">Flight Type</th>
+            <th scope="col" style="text-align: center;">Referrer</th>
+            <th scope="col" style="text-align: center;">Requestor</th>
+            <th scope="col" style="text-align: center;">Receving Agency</th>
+        </tr>
+
+        {% for i in sc_all_transported %}
+        <tr>
+            <td scope="row">{{i.flight_num}}</td>
+            <td scope="row" style="text-align: center;">{{i.transport_date}}</td>
+            <td scope="row" style="text-align: center;">{{i.outcome}}</td>
+            <td scope="row" style="text-align: center;">{{i.call_type}}</td>
+            <td scope="row" style="text-align: center;">{{i.referrer_name}}</td>
+            <td scope="row" style="text-align: center;">{{i.requesting_agency}}</td>
+            <td scope="row" style="text-align: center;">{{i.dropoff_location}}</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+            <td scope="row">Total Transports</td>
+            <td scope="row" style="text-align: center;">{{sc_all_transported.count}}</td>
+        </tr>
+    </table>
+</div>
+<!--End List of Sioux City Flights-->
+       
+    
+<div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home"
+            type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
+        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+            type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
+        <button class="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled"
+            type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false" disabled>Disabled</button>
+        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages"
+            type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
+        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
+            type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
+    </div>
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+            tabindex="0"><!--List of Sioux City Flights-->
+            <div style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left:50px;">
+                <table class="table table-striped" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <td colspan="2" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 4
+                                Transported Flights
+                            </td>
+                        </tr>
+                    </thead>
+            
+                    <tr>
+                        <th scope="col">Flight Number</th>
+                        <th scope="col" style="text-align: center;">Flight Date</th>
+                        <th scope="col" style="text-align: center;">Outcome</th>
+                        <th scope="col" style="text-align: center;">Flight Type</th>
+                        <th scope="col" style="text-align: center;">Referrer</th>
+                        <th scope="col" style="text-align: center;">Requestor</th>
+                        <th scope="col" style="text-align: center;">Receving Agency</th>
+                    </tr>
+            
+                    {% for i in sc_all_transported %}
+                    <tr>
+                        <td scope="row">{{i.flight_num}}</td>
+                        <td scope="row" style="text-align: center;">{{i.transport_date}}</td>
+                        <td scope="row" style="text-align: center;">{{i.outcome}}</td>
+                        <td scope="row" style="text-align: center;">{{i.call_type}}</td>
+                        <td scope="row" style="text-align: center;">{{i.referrer_name}}</td>
+                        <td scope="row" style="text-align: center;">{{i.requesting_agency}}</td>
+                        <td scope="row" style="text-align: center;">{{i.dropoff_location}}</td>
+                    </tr>
+            
+                    {% endfor %}
+                    <tr>
+                        <td scope="row">Total Transports</td>
+                        <td scope="row" style="text-align: center;">{{sc_all_transported.count}}</td>
+                    </tr>
+                </table>
+            </div>
+            <!--End List of Sioux City Flights--></div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+            tabindex="0">...</div>
+        <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab"
+            tabindex="0">...</div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"
+            tabindex="0">...</div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+            tabindex="0">...</div>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!--Total Flight Chart-->
+<script>
+
+ 
+
+
+   const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Des Moines', 'Knoxville', 'Mason City', 'Sioux City'],
+            datasets: [{
+                label: '# of Flights',
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                data: [{{ dsm_total_flights }}, {{ kx_total_flights }}, {{ mc_total_flights }}, {{ sc_total_flights }}],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Total Flights'
+                }
+            },
+            
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }, 
+        }
+    });
+
+//Interfacility Graph
+ new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: ["Des Moines", "Knoxville", "Mason City", "Sioux City"],
+            datasets: [
+                {
+                    label: '# of Flights',
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                    data: [{{ dsm_interfacility.count }},{{ kx_interfacility.count }}, {{ mc_interfacility.count }}, {{ sc_interfacility.count }}]
+                }
+            ]
+        },
+        options: {
+            plugins:{
+                legend: { display: false },
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Total Interfacility",
+
+                }
+            }
+            
+        }
+    });   
+
+    //Scene Graph
+    new Chart(document.getElementById("bar-chart-1"), {
+        type: 'bar',
+        data: {
+            labels: ["Des Moines", "Knoxville", "Mason City", "Sioux City"],
+            datasets: [
+                {
+                    label: '# of Flights',
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                    data: [{{ dsm_scene.count }}, {{ kx_scene.count }}, {{ mc_scene.count }}, {{ sc_scene.count }}]
+                }
+            ]
+        },
+        options: {
+        plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                position: "top",
+                text: "Total Scene",
+
+            }
+        }
+
+    }
+    }); 
+    
+    //Chart By Hour DSM
+    new Chart(document.getElementById("dsm-hour-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["0:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+            "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+                datasets: [
+                    {
+                        label: '# of Flights',
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                        data: [{% for i in dsm_time_of_day %}
+                            {{ i.call_count }},
+        
+            {% endfor %}]
+                }
+            ]
+        },
+            options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "DSM Flight Totals By Hour",
+
+                }
+            }
+
+        }
+    }); //End DSM Chart By Hours
+
+    // KX Chart By Hours
+    new Chart(document.getElementById("kx-hour-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["0:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+                    "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+                datasets: [
+                    {
+                        label: '# of Flights',
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                        data: [{% for i in kx_time_of_day %}
+                            {{ i.call_count }},
+        
+            {% endfor %}]
+                }
+            ]
+        },
+            options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Knoxville Flight Totals By Hour",
+
+                }
+            }
+
+        }
+    }); //End KX Chart By Hours
+
+     // Mason City  Chart By Hours
+        new Chart(document.getElementById("mc-hour-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["0:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+                    "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+                datasets: [
+                    {
+                        label: '# of Flights',
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                        data: [{% for i in mc_time_of_day %}
+                            {{ i.call_count }},
+        
+            {% endfor %}]
+                }
+            ]
+        },
+            options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Mason City Flight Totals By Hour",
+
+                }
+            }
+
+        }
+    }); //End Mason City Chart By Hours
+
+    // Sioux City  Chart By Hours
+        new Chart(document.getElementById("sc-hour-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["0:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+                    "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
+                datasets: [
+                    {
+                        label: '# of Flights',
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                        data: [{% for i in sc_time_of_day %}
+                            {{ i.call_count }},
+        
+            {% endfor %}]
+                }
+            ]
+        },
+            options: {
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Sioux City Flight Totals By Hour",
+
+                }
+            }
+
+        }
+    }); //End Sioux City Chart By Hours
+
+</script>
+</body>
+</html>
+
+{% endblock %}
+
+{% include 'footer.html' %}

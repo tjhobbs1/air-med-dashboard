@@ -7,4 +7,5 @@ urlpatterns = [
     path('success/', views.upload_success, name="upload_success"),
     path('flight_data/', views.flight_data, name="flight_data"),
     path('search/', views.flight_search, name="search"),
+    path('transport_search/', views.transport_search, name="transport_search"),
 ]

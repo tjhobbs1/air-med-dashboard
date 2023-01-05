@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;"> Air Med Quality Dashboard</h1>
+
+<!--Start Transport Information-->
+<div style="padding-top: 50px; padding-right: 180px; padding-bottom: 50px; padding-left: 180px;">
+    <h2 style="text-align: center;">Transport Information</h2>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Air Med 1</h2>
+                <hr>
+                <h5 class="card-text">Transports: {{des_moines_transport.count}}</h5>
+                <h5 class="card-text">No Pt Transport: {{des_moines_no_transport.count}}</h5>
+                <h5 class="card-text">Scene: {{des_moines_scenes.count}}</h5>
+                <h5 class="card-text">Interfacility: {{des_moines_ift.count}}</h5>
+                <h5 class="card-text">Total Contacts: {{des_moines_ift.count|add:des_moines_scenes.count}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Air Med 2</h2>
+                <hr>
+                <h5 class="card-text">Transports: {{knoxville_transport.count}}</h5>
+                <h5 class="card-text">No Pt Transport: {{knoxville_no_transport.count}}</h5>
+                <h5 class="card-text">Scene: {{knoxville_scenes.count}}</h5>
+                <h5 class="card-text">Interfacility: {{knoxville_ift.count}}</h5>
+                <h5 class="card-text">Total Contacts: {{knoxville_ift.count|add:knoxville_scenes.count}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Air Med 3</h2>
+                <hr>
+                <h5 class="card-text">Transports: {{mason_city_transport.count}}</h5>
+                <h5 class="card-text">No Pt Transport: {{mason_city_no_transport.count}}</h5>
+                <h5 class="card-text">Scene: {{mason_city_scenes.count}}</h5>
+                <h5 class="card-text">Interfacility: {{mason_city_ift.count}}</h5>
+                <h5 class="card-text">Total Contacts: {{mason_city_ift.count|add:mason_city_scenes.count}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Air Med 4</h2>
+                <hr>
+                <h5 class="card-text">Transports: {{sioux_city_transport.count}}</h5>
+                <h5 class="card-text">No Pt Transport: {{sioux_city_no_transport.count}}</h5>
+                <h5 class="card-text">Scene: {{sioux_city_scenes.count}}</h5>
+                <h5 class="card-text">Interfacility: {{sioux_city_ift.count}}</h5>
+                <h5 class="card-text">Total Contacts: {{sioux_city_ift.count|add:sioux_city_scenes.count}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<!--End Transport Information-->
+
+<hr>
+
+
+<!--Start Airway Stats-->
+<div style="padding-top: 50px; padding-right: 180px; padding-bottom: 50px; padding-left: 180px;">
+    <h2 style="text-align: center;">Airway Stats</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Air Med 1</h2>
+                    <hr>
+                    <h5 class="card-text">Advanced Airway In Place: {{des_moines_advanced_airway_in.count}}</h5>
+                    <h5 class="card-text">Advanced Airway Placed By Transport Team: {{des_moines_adv_airway_by_flight_crew.count}}</h5>
+                    <h5 class="card-text">RSI Utlized to Secure Airway: {{des_moines_rsi_utlized.count}}</h5>
+                    <h5 class="card-text">Intubation Done In Transport: {{des_moines_intbation_in_vehicle.count}}</h5>
+                    <hr>
+                    <h4>Airway Type</h4>
+                    {% for key, value in des_moines_airway_type.items %}
+                    <h5 class="card-text">{{key}}: {{value}}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Air Med 2</h2>
+                    <hr>
+                    <h5 class="card-text">Advanced Airway In Place: {{knoxville_advanced_airway_in.count}}</h5>
+                    <h5 class="card-text">Advanced Airway Placed By Transport Team: {{knoxville_adv_airway_by_flight_crew.count}}</h5>
+                    <h5 class="card-text">RSI Utlized to Secure Airway: {{knoxville_rsi_utlized.count}}</h5>
+                    <h5 class="card-text">Intubation Done In Transport: {{knoxville_intbation_in_vehicle.count}}</h5>
+                    <hr>
+                    <h4>Airway Type</h4>
+                    {% for key, value in knoxville_airway_type.items %}
+                    <h5 class="card-text">{{key}}: {{value}}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Air Med 3</h2>
+                    <hr>
+                    <h5 class="card-text">Advanced Airway In Place: {{mason_city_advanced_airway_in.count}}</h5>
+                    <h5 class="card-text">Advanced Airway Placed By Transport Team: {{mason_city_adv_airway_by_flight_crew.count}}</h5>
+                    <h5 class="card-text">RSI Utlized to Secure Airway: {{mason_city_rsi_utlized.count}}</h5>
+                    <h5 class="card-text">Intubation Done In Transport: {{mason_city_intbation_in_vehicle.count}}</h5>
+                    <hr>
+                    <h4>Airway Type</h4>
+                    {% for key, value in mason_city_airway_type.items %}
+                    <h5 class="card-text">{{key}}: {{value}}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Air Med 4</h2>
+                    <hr>
+                    <h5 class="card-text">Advanced Airway In Place: {{sioux_city_advanced_airway_in.count}}</h5>
+                    <h5 class="card-text">Advanced Airway Placed By Transport Team: {{sioux_city_adv_airway_by_flight_crew.count}}</h5>
+                    <h5 class="card-text">RSI Utlized to Secure Airway: {{sioux_city_rsi_utlized.count}}</h5>
+                    <h5 class="card-text">Intubation Done In Transport: {{sioux_city_intbation_in_vehicle.count}}</h5>
+                    <hr>
+                    <h4>Airway Type</h4>
+                    {% for key, value in sioux_city_airway_type.items %}
+                    <h5 class="card-text">{{key}}: {{value}}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--End Airway Stats-->
+
+<br>
+
+<!--Des Moines Airway Table-->
+<div style="padding-left: 100px; padding-right:100px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <td colspan="4" style="text-align: center; color:green; font-size: 25px; font-weight: bold;">Air Med 1 | Des Moines
+            
+                </td>
+             </tr>   
+        </thead>
+        <thead>
+            <tr>
+                <th scope="col">Quality Indicator</th>
+                <th scope="col">Percentage</th>
+                <th scope="col">Goal</th>
+                <th scope="col">Threshold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--End Tidal-->
+            <tr>
+                <td><h3>End-Tidal On Intubated Pateints</h3></td>
+                <td>{% if des_moines_etco2_percent < 90 %} <h3 id="belowThreshold">{{des_moines_etco2_percent}}%</h3>
+                    {% elif des_moines_etco2_percent < 95 %} <h3 id="threshold">{{des_moines_etco2_percent}}%
+                        </h3>
+                        {%else%}
+                        <h3 id="meetsGoal">{{des_moines_etco2_percent}}%</h3>
+                        {% endif %}</td>
+                <td><h3>95%</h3></td>
+                <td><h3>90%</h3></td>
+            </tr>
+            <!--END End Tidal-->
+
+            <!--Invasive Intubation on Intubated Patient-->
+            <tr>
+                <td>
+                    <h3>Invasive Vent on Intubated Pateints</h3>
+                </td>
+                <td>{% if des_moines_invasive_vent_percent < 90 %} <h3 id="belowThreshold">{{des_moines_invasive_vent_percent}}%</h3>
+                        {% elif des_moines_invasive_vent_percent < 95 %} <h3 id="threshold">{{des_moines_invasive_vent_percent}}%
+                            </h3>
+                            {%else%}
+                            <h3 id="meetsGoal">{{des_moines_invasive_vent_percent}}%</h3>
+                            {% endif %}</td>
+                <td>
+                    <h3>95%</h3>
+                </td>
+                <td>
+                    <h3>90%</h3>
+                </td>
+            </tr>
+            <!--END Invasive Intubation on Intubated Patient-->
+
+            <!--Intubation on First Attempt-->
+
+            <tr>
+                <td>
+                    <h3>Intubation on First Attempt</h3>
+                </td>
+                <td>{% if des_moines_intubation_on_first_attempt_percent < 90 %} <h3 id="belowThreshold">{{des_moines_intubation_on_first_attempt_percent}}%
+                        </h3>
+                        {% elif des_moines_intubation_on_first_attempt_percent < 95 %} <h3 id="threshold">{{des_moines_intubation_on_first_attempt_percent}}%
+                            </h3>
+                            {%elif des_moines_intubation_on_first_attempt_percent < 100 %} <h3 id="meetsGoal">{{des_moines_intubation_on_first_attempt_percent}}%</h3>
+                            {%else%}
+                            {% endif %}
+                                <h3>N/A</h3>
+                        </td>
+                <td>
+                    <h3>95%</h3>
+                </td>
+                <td>
+                    <h3>90%</h3>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<!--END Des Moines Airway Table-->
+
+Test
+{{des_moines_intubation_on_first_attempt_percent}}
+
+<h2>Patient Temp Documented</h2>
+<h3>Des Moines</h3>
+{% if des_moines_temp_percent < 90 %} <h3 id="belowThreshold">{{des_moines_temp_percent}}%</h3>
+    {% elif des_moines_temp_percent < 95 %} <h3 id="threshold">{{des_moines_temp_percent}}%</h3>
+        {%else%}
+        <h3 id="meetsGoal">{{des_moines_temp_percent}}%</h3>
+        {% endif %}
+<br>
+
+<h3>Knoxville</h3>
+{% if knoxville_temp_percent < 90 %} <h3 id="belowThreshold">{{knoxville_temp_percent}}%</h3>
+    {% elif knoxville_temp_percent < 95 %} <h3 id="threshold">{{knoxville_temp_percent}}%</h3>
+        {%else%}
+        <h3 id="meetsGoal">{{knoxville_temp_percent}}%</h3>
+        {% endif %}
+        <br>
+<h3>Mason City</h3>
+{% if mason_city_temp_percent < 90 %} <h3 id="belowThreshold">{{mason_city_temp_percent}}%</h3>
+    {% elif mason_city_temp_percent < 95 %} <h3 id="threshold">{{mason_city_temp_percent}}%</h3>
+        {%else%}
+        <h3 id="meetsGoal">{{mason_city_temp_percent}}%</h3>
+        {% endif %}
+        <br>
+
+<h3>Sioux City</h3>
+{% if sioux_city_temp_percent < 90 %} <h3 id="belowThreshold">{{sioux_city_temp_percent}}%</h3>
+    {% elif sioux_city_temp_percent < 95 %} <h3 id="threshold">{{sioux_city_temp_percent}}%</h3>
+        {%else%}
+        <h3 id="meetsGoal">{{sioux_city_temp_percent}}%</h3>
+        {% endif %}
+        <br>
+Vent Usage
+
+{% if vent_usage_percent < 90 %}
+<h3 id="belowThreshold">{{vent_usage_percent}}%</h3>
+{% elif vent_usage_percent < 95 %}
+    <h3 id="threshold">{{vent_usage_percent}}%</h3>
+{%else%}
+<h3 id="meetsGoal">{{vent_usage_percent}}%</h3>
+{% endif %}
+
+
+{% endblock %}
+
+{% include 'footer.html' %}

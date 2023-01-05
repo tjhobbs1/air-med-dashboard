@@ -25,4 +25,6 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('accounts/', include('accounts.urls')),
     path('flight_data/', include('flight_data.urls')),
+    path('communication/', include('communication_board.urls')),
+    path('quality/', include('quality_dashboard.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Board Entry</title>
+</head>
+<body>
+    <h1>Issues Entry</h1>
+{% if error %}
+{{ error }}
+<br>
+
+{% endif %}
+    <form action="{% url 'board_admin'%}" method="POST">{% csrf_token %}
+        {{form.as_p}}
+       
+        <!-- <label for="start">Issue Date:</label>
+            <input type="date" id="date_opened" name="date_opened" > -->
+        
+        <!-- <br>
+        <br>
+        <label for="base">Choose a Base:</label>
+            <select id="base" name="base">
+                <option value="airmed1">Air Med 1</option>
+                <option value="airmed2">Air Med 2</option>
+                <option value="both">Both</option>
+                <option value="na">N/A</option>
+            </select>
+        <br>
+
+        <label for="issue_category">Choose a Category:</label>
+        <select id="issue_category" name="issue_category">
+            <option value="maintenance">Maintenance</option>
+            <option value="safety">Safety</option>
+            <option value="equipment">Equipment</option>
+            <option value="patientCare">Patient Care</option>
+            <option value="communication">Communication</option>
+            <option value="other">Other</option>
+        </select>
+        <br>
+        <br>
+
+        <label for="transport_related">Transport Related?</label>
+        <select id="transport_related" name="transport_related">
+            <option value="">--</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <br>
+        <br>
+
+        <label for="reported_issue">Reported Issue</label>
+        <br>
+        <textarea name="reported_issue" rows="10" cols="30">
+       
+        </textarea>
+        <br>
+        <br>
+        <label for="reported_by_person1">Reported By 1:</label>
+        <input type="text" id="reported_by_person1" name="reported_by_person1">
+
+        <br>
+        <br>
+        <label for="reported_by_person2">Reported By 2:</label>
+        <input type="text" id="reported_by_person2" name="reported_by_person2">
+        <br>
+        <br>
+        <label for="issue_status">Choose a Category:</label>
+        <select id="issue_status" name="issue_status">
+            <option value="open">Open</option>
+            <option value="investigation">Investigation</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="closed">Closed</option>
+        </select>
+        <br>
+        <br>
+        <label for="follow_up_information">Follow Up Information</label>
+        <br>
+        <textarea name="follow_up_information" rows="10" cols="30">
+        
+        </textarea>
+
+        <br>
+        <br>
+
+        <label for="assigned_to_person1">Assigned to 1:</label>
+        <select id="assigned_to_person1" name="assigned_to_person1">
+            <option value="">--</option>
+            <option value="leadership">Leadership</option>
+            <option value="amc">Air Methods</option>
+            <option value="communication">Communication Leadership</option>
+        </select>
+
+        <br>
+        <br>
+        
+        <label for="assigned_to_person2">Assigned to 2:</label>
+        <select id="assigned_to_person2" name="assigned_to_person2">
+            <option value="">--</option>
+            <option value="leadership">Leadership</option>
+            <option value="amc">Air Methods</option>
+            <option value="communication">Communication Leadership</option>
+            <option value="na">N/A</option>
+        </select>
+        <br>
+        <br>
+        <label for="date_closed">Date Closed:</label>
+        <input type="date" id="date_closed" name="date_closed">
+
+        <br>
+        <br> -->
+        <input type="submit" value="Submit">
+    </form>
+    <!--End Form-->
+</body>
+</html>

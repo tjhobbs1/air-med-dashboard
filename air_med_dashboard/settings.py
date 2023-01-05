@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
 
     'accounts',
     'flight_data',
+    'communication_board',
+    'quality_dashboard'
 ]
 
 MIDDLEWARE = [
